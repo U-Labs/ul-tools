@@ -14,6 +14,7 @@ date=$(date +'%d.%m.%Y_%H-%M-%S')
 full_target_dir="$target_dir/$date"
 mkdir $full_target_dir
 chmod 660 $full_target_dir
+mysql --version
 echo "Target: $full_target_dir"
 
 for db in $dbs; do
@@ -26,3 +27,4 @@ for db in $dbs; do
     #mysqldump --lock-tables=false --user=$user -p"$pw" --databases $db | gzip > "$full_target_dir/$db.gz"
     #mysqldump --lock-tables=false --user=$user -p$pw --databases $db | 7z a -si -t7z -m0=LZMA -mmt=on -mx=7 -md=32m -mfb=24 "$full_target_dir/$db.7z"
 done
+ls -lh $full_target_dir
